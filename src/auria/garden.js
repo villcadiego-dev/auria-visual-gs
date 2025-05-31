@@ -1,4 +1,4 @@
-import { Viewer, DropInViewer, ArrowHelper } from './auria/auria.js';
+import { Viewer, DropInViewer, ArrowHelper } from './auria.js';
 
 
 const urlParams = new URLSearchParams(window.location.search);

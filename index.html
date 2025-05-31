@@ -179,7 +179,7 @@
         border-radius: 50%;
         --_m:
             conic-gradient(#0000,#000),
-            linear-gradient(#000 0 0) content-box;
+            linear-gradient(to bottom, #000 0%, #000 100%) content-box;
         -webkit-mask: var(--_m);
             mask: var(--_m);
         -webkit-mask-composite: source-out;
@@ -271,14 +271,7 @@
     }
 
   </style>
-  <script type="importmap">
-    {
-        "imports": {
-            "three": "./lib/three.module.js",
-            "gaussian-splats-3d": "./lib/gaussian-splats-3d.module.js"
-        }
-    }
-  </script>
+
   <script>
     let currentAlphaRemovalThreshold;
     let currentCameraUpArray;
@@ -594,7 +587,7 @@
   </script>
   <script>
     function openDemo(page, params) {
-      let url = page + '.html';
+      let url = 'views/' + page + '.html';
       if (params && params.length > 0) {
         let index = 0;
         for (let param of params) {
@@ -603,6 +596,7 @@
           index++;
         }
       }
+      console.log(url);
       window.location = url;
     }
     function reset() {
