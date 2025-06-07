@@ -1,5 +1,5 @@
 [build]
-  # Directorio de publicación (donde están los archivos estáticos)
+  # Directorio de publicación (raíz del proyecto donde está index.html)
   publish = "."
   
   # Comando de build (opcional, ya que es un sitio estático)
@@ -39,11 +39,7 @@
     Content-Type = "application/octet-stream"
     Access-Control-Allow-Origin = "*"
 
-# Redirects para SPA (Single Page Application)
-[[redirects]]
-  from = "/views/*"
-  to = "/views/:splat"
-  status = 200
+# Sin redirects - servir archivos estáticos directamente
 
 # Configuración de formularios (si los necesitas)
 [build.environment]
