@@ -1,0 +1,70 @@
+[build]
+  # Directorio de publicación (desde dist/ generado por Vite)
+  publish = "dist"
+  
+  # Comando de build usando Vite
+  command = "npm run build"
+
+# Headers optimizados para 3D Gaussian Splatting
+[[headers]]
+  # Aplicar headers a todos los archivos
+  for = "/*"
+  [headers.values]
+    # Habilitar CORS para archivos 3D
+    Access-Control-Allow-Origin = "*"
+    # Cache general
+    Cache-Control = "public, max-age=31536000"
+    # Headers para SharedArrayBuffer y crossOriginIsolated
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Embedder-Policy = "require-corp"
+    Cross-Origin-Resource-Policy = "cross-origin"
+
+[[headers]]
+  # Headers específicos para archivos 3D
+  for = "*.ksplat"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "*.ply"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "*.glb"
+  [headers.values]
+    Content-Type = "model/gltf-binary"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "*.fbx"
+  [headers.values]
+    Content-Type = "application/octet-stream"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "*.wasm"
+  [headers.values]
+    Content-Type = "application/wasm"
+    Access-Control-Allow-Origin = "*"
+
+# Headers para HTML y JS (sin cache largo)
+[[headers]]
+  for = "*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
+    Access-Control-Allow-Origin = "*"
+
+# Sin redirects - servir archivos estáticos directamente
+
+# Configuración de entorno
+[build.environment]
+  NODE_VERSION = "18"
