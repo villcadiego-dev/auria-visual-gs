@@ -7,7 +7,7 @@ export const SCENE_CONFIGS = {
     // Configuración para la escena auria (office)
     auria: {
         name: 'Office Scene',
-        splatPath: '/assets/data/office/demo_office_gs.ksplat',
+        splatPath: 'https://github.com/villcadiego-dev/auria-visual-gs/releases/download/v1.0/demo_office_gs.ksplat',
         defaultTransform: {
             rotation: [-0.8639, 0.0758, -0.4788, 0.1368], // Quaternion optimizado para orientación correcta
             position: [-1.7, 2.8, 0.0], // Posición ajustada para vista correcta
@@ -21,7 +21,7 @@ export const SCENE_CONFIGS = {
     // Configuración para la escena dropin (garden)
     dropin: {
         name: 'Garden Scene',
-        splatPath: '/assets/data/garden/garden_high.ksplat',
+        splatPath: 'https://github.com/villcadiego-dev/auria-visual-gs/releases/download/v1.0/garden_high.ksplat',
         defaultTransform: {
             // Rotación optimizada para orientación correcta
             rotation: [0.9681, 0.0000, 0.0000, 0.2504], // Quaternion [x, y, z, w]
@@ -40,7 +40,7 @@ export const SCENE_CONFIGS = {
     // Configuración para futuras escenas (ejemplos)
     bonsai: {
         name: 'Bonsai Scene',
-        splatPath: '/assets/data/bonsai/bonsai_trimmed.ksplat',
+        splatPath: 'https://github.com/villcadiego-dev/auria-visual-gs/releases/download/v1.0/bonsai_trimmed.ksplat',
         defaultTransform: {
             rotation: [0, 0, 0, 1], // Sin rotación inicial
             position: [0.0, 0.0, 0.0], // Posición central
@@ -54,7 +54,7 @@ export const SCENE_CONFIGS = {
 
     stump: {
         name: 'Stump Scene', 
-        splatPath: '/assets/data/stump/stump_high.ksplat',
+        splatPath: 'https://github.com/villcadiego-dev/auria-visual-gs/releases/download/v1.0/stump_high.ksplat',
         defaultTransform: {
             // Valores optimizados para la escena stump
             rotation: [0.9239, 0.0000, 0.0000, 0.3827], // Quaternion optimizado para orientación correcta
@@ -69,7 +69,7 @@ export const SCENE_CONFIGS = {
 
     truck: {
         name: 'Truck Scene',
-        splatPath: '/assets/data/truck/truck_high.ksplat', 
+        splatPath: 'https://github.com/villcadiego-dev/auria-visual-gs/releases/download/v1.0/truck_high.ksplat', 
         defaultTransform: {
             rotation: [0.9976, 0.0000, 0.0000, 0.0698], // Quaternion optimizado para orientación correcta
             position: [0.0, 1.6, 0.0], // Posición ajustada para altura correcta

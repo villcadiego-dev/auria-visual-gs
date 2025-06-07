@@ -1,5 +1,6 @@
 build
 public/assets/data/*
+release-files/
 
 # Node modules
 node_modules/
