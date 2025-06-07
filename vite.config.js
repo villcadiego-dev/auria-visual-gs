@@ -25,7 +25,8 @@ export default defineConfig({
                 garden: resolve(__dirname, 'public/views/garden.html'),
                 bonsai: resolve(__dirname, 'public/views/bonsai.html'),
                 dynamic_scenes: resolve(__dirname, 'public/views/dynamic_scenes.html'),
-                dynamic_dropin: resolve(__dirname, 'public/views/dynamic_dropin.html')
+                dynamic_dropin: resolve(__dirname, 'public/views/dynamic_dropin.html'),
+                taller: resolve(__dirname, 'public/views/taller.html')
                 // Temporarily excluded due to active @mkkellogg/gaussian-splats-3d imports:
                 // vr: resolve(__dirname, 'public/views/vr.html')
             }

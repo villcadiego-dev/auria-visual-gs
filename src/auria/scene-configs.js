@@ -17,6 +17,21 @@ export const SCENE_CONFIGS = {
             splatAlphaRemovalThreshold: 25,
             progressiveLoad: false
         }
+    },
+
+    // Nueva escena taller
+    taller: {
+        name: 'Taller Scene',
+        splatPath: '/assets/data/taller/taller.ksplat',
+        defaultTransform: {
+            rotation: [0.0000, 0.0000, -1.0000, 0.0000], // Quaternion optimizado para orientación correcta
+            position: [0.0, 5.7, 0.0], // Posición ajustada para vista perfecta del taller
+            scale: [1.0, 1.0, 1.0]
+        },
+        splatOptions: {
+            splatAlphaRemovalThreshold: 20,
+            progressiveLoad: false
+        }
     }
 };
 
