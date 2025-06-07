@@ -13,7 +13,6 @@ class AuriaScene extends BaseScene {
             includeGrid: true,
             includeAxes: true,
             includeGroundPlane: true,
-            includeFBX: false, // Sin modelo FBX para scene office
             
             // Opciones específicas para office scene
             cameraHeight: 1.2,

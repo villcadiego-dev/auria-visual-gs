@@ -13,7 +13,6 @@ class TruckScene extends BaseScene {
             includeGrid: true,
             includeAxes: true,
             includeGroundPlane: true,
-            includeFBX: true // Opcional, modelo de persona
         });
     }
 

@@ -1,5 +1,4 @@
 import * as THREE from 'three';
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 
 /**
  * Factory para crear elementos comunes de escenas (luces, grid, jugador, etc.)
@@ -129,37 +128,6 @@ export class SceneFactory {
         return playerGroup;
     }
 
-    /**
-     * Cargar modelo FBX opcional
-     */
-    static loadFBXModel(scene, options = {}) {
-        const {
-            path = '/assets/models/',
-            filename = 'person.fbx',
-            scale = 0.015,
-            position = [5, 0, 15],
-            castShadow = true
-        } = options;
-
-        const loader = new FBXLoader();
-        loader.setPath(path);
-        
-        return new Promise((resolve, reject) => {
-            loader.load(filename, (fbx) => {
-                fbx.scale.setScalar(scale);
-                fbx.position.set(...position);
-                
-                if (castShadow) {
-                    fbx.traverse(c => {
-                        c.castShadow = true;
-                    });
-                }
-                
-                scene.add(fbx);
-                resolve(fbx);
-            }, undefined, reject);
-        });
-    }
 
     /**
      * Crear cámara personalizada para FPS
@@ -211,7 +179,6 @@ export class SceneFactory {
             includeAxes = true,
             includeGroundPlane = true,
             includePlayer = true,
-            includeFBX = false,
             ...elementOptions
         } = options;
 
@@ -232,10 +199,6 @@ export class SceneFactory {
 
         if (includePlayer) {
             elements.player = this.createPlayer(scene, elementOptions.player);
-        }
-
-        if (includeFBX) {
-            elements.fbxPromise = this.loadFBXModel(scene, elementOptions.fbx);
         }
 
         return elements;

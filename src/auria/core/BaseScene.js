@@ -18,7 +18,6 @@ export class BaseScene {
             includeGrid: true,
             includeAxes: true,
             includeGroundPlane: true,
-            includeFBX: false,
             
             // Opciones de interacción
             enableInteraction: false,
@@ -107,7 +106,6 @@ export class BaseScene {
             includeAxes: this.options.includeAxes,
             includeGroundPlane: this.options.includeGroundPlane,
             includePlayer: this.options.includePlayer,
-            includeFBX: this.options.includeFBX
         });
         
         this.threeScene = sceneElements.scene;

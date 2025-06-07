@@ -15,7 +15,6 @@ class DropinScene extends BaseScene {
             includeGrid: true,
             includeAxes: true,
             includeGroundPlane: true,
-            includeFBX: true
         });
     }
 
