@@ -4,69 +4,7 @@
  */
 
 export const SCENE_CONFIGS = {
-    // Configuración para la escena auria (office)
-    auria: {
-        name: 'Office Scene',
-        splatPath: '/assets/data/office/demo_office_gs.ksplat',
-        defaultTransform: {
-            rotation: [-0.8639, 0.0758, -0.4788, 0.1368], // Quaternion optimizado para orientación correcta
-            position: [-1.7, 2.8, 0.0], // Posición ajustada para vista correcta
-            scale: [1.0, 1.0, 1.0]
-        },
-        splatOptions: {
-            progressiveLoad: false
-        }
-    },
-
-    // Configuración para la escena dropin (garden)
-    dropin: {
-        name: 'Garden Scene',
-        splatPath: '/assets/data/garden/garden_high.ksplat',
-        defaultTransform: {
-            // Rotación optimizada para orientación correcta
-            rotation: [0.9681, 0.0000, 0.0000, 0.2504], // Quaternion [x, y, z, w]
-            // Posición ajustada para altura correcta
-            position: [0.0, 3.2, 0.0], // Vector3 [x, y, z]
-            // Escala estándar
-            scale: [1.0, 1.0, 1.0] // Vector3 [x, y, z]
-        },
-        // Configuraciones específicas del splat
-        splatOptions: {
-            splatAlphaRemovalThreshold: 20,
-            progressiveLoad: false
-        }
-    },
-
-    // Configuración para futuras escenas (ejemplos)
-    bonsai: {
-        name: 'Bonsai Scene',
-        splatPath: '/assets/data/bonsai/bonsai_trimmed.ksplat',
-        defaultTransform: {
-            rotation: [0, 0, 0, 1], // Sin rotación inicial
-            position: [0.0, 0.0, 0.0], // Posición central
-            scale: [1.0, 1.0, 1.0]
-        },
-        splatOptions: {
-            splatAlphaRemovalThreshold: 15,
-            progressiveLoad: true
-        }
-    },
-
-    stump: {
-        name: 'Stump Scene', 
-        splatPath: '/assets/data/stump/stump_high.ksplat',
-        defaultTransform: {
-            // Valores optimizados para la escena stump
-            rotation: [0.9239, 0.0000, 0.0000, 0.3827], // Quaternion optimizado para orientación correcta
-            position: [0.0, 3.2, 0.0], // Posición ajustada para vista correcta
-            scale: [1.0, 1.0, 1.0]
-        },
-        splatOptions: {
-            splatAlphaRemovalThreshold: 20,
-            progressiveLoad: false
-        }
-    },
-
+    // Solo truck disponible en producción
     truck: {
         name: 'Truck Scene',
         splatPath: '/assets/data/truck/truck_high.ksplat', 
