@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <title>3D Gaussian Splats - Drop-in example</title>
+  <title>3D Gaussian Splats - First Person Controller</title>
   <script type="text/javascript" src="js/util.js"></script>
   <style>
 
@@ -13,12 +13,383 @@
       background-color: #000000;
       height: 100vh;
       margin: 0px;
+      font-family: Arial, sans-serif;
+      cursor: crosshair;
+    }
+
+    #instructions {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 14px;
+      z-index: 1000;
+      transition: opacity 0.3s;
+    }
+
+    #instructions h3 {
+      margin: 0 0 10px 0;
+      color: #4CAF50;
+    }
+
+    #instructions.hidden {
+      opacity: 0.3;
+    }
+
+    #rotation-controls {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: white;
+      background-color: rgba(0, 0, 0, 0.8);
+      padding: 15px;
+      border-radius: 8px;
+      font-size: 12px;
+      z-index: 1000;
+      min-width: 200px;
+    }
+
+    #rotation-controls h4 {
+      margin: 0 0 10px 0;
+      color: #FFD700;
+      text-align: center;
+    }
+
+    .rotation-slider {
+      margin: 8px 0;
+    }
+
+    .rotation-slider label {
+      display: inline-block;
+      width: 60px;
+      font-weight: bold;
+    }
+
+    .rotation-slider input[type="range"] {
+      width: 120px;
+      margin: 0 5px;
+    }
+
+    .rotation-slider .value {
+      display: inline-block;
+      width: 40px;
+      text-align: right;
+      font-family: monospace;
+      color: #4CAF50;
+    }
+
+    #quaternion-display {
+      margin-top: 10px;
+      padding: 8px;
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 10px;
+      color: #FFD700;
+    }
+
+    #reset-button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 8px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    #reset-button:hover {
+      background-color: #45a049;
+    }
+
+    /* Modal styles */
+    #info-modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background-color: #1a1a1a;
+      margin: 10% auto;
+      padding: 30px;
+      border: none;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 600px;
+      color: white;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      position: relative;
+      animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+      from { opacity: 0; transform: translateY(-50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-header {
+      border-bottom: 2px solid #FFD700;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .modal-header h2 {
+      margin: 0;
+      color: #FFD700;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .modal-header .subtitle {
+      color: #4CAF50;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+    .modal-body {
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .modal-body h3 {
+      color: #4CAF50;
+      margin: 20px 0 10px 0;
+      font-size: 18px;
+    }
+
+    .modal-body p {
+      margin: 15px 0;
+      text-align: justify;
+    }
+
+    .highlight {
+      color: #FFD700;
+      font-weight: bold;
+    }
+
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      line-height: 1;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #FFD700;
+      text-decoration: none;
+    }
+
+    .interaction-hint {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 12px;
+      display: none;
+      z-index: 1500;
+    }
+
+    /* Crosshair para targeting */
+    #crosshair {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      pointer-events: none;
+      z-index: 1000;
+    }
+
+    #crosshair::before,
+    #crosshair::after {
+      content: '';
+      position: absolute;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+
+    #crosshair::before {
+      top: 50%;
+      left: 8px;
+      width: 4px;
+      height: 2px;
+      transform: translateY(-50%);
+    }
+
+    #crosshair::after {
+      top: 8px;
+      left: 50%;
+      width: 2px;
+      height: 4px;
+      transform: translateX(-50%);
+    }
+
+    .control {
+      margin: 5px 0;
+    }
+
+    .key {
+      background-color: #333;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+      color: #FFD700;
     }
 
   </style>
 </head>
 <body>
-  <script type="module" src="/src/auria/dropin.js"></script>
+  <div id="instructions">
+    <h3>Controles FPS (Primera Persona)</h3>
+    <div class="control"><span class="key">W A S D</span> - Movimiento relativo (W=adelante, S=atrás, A=izq, D=der)</div>
+    <div class="control"><span class="key">Mouse</span> - Mirar/apuntar (como FPS)</div>
+    <div class="control"><span class="key">Space</span> - Saltar</div>
+    <div class="control"><span class="key">Click</span> - Capturar mouse</div>
+    <div class="control"><span class="key">ESC</span> - Liberar mouse</div>
+    <div style="margin-top: 10px; font-size: 12px; color: #AAA;">
+      - Sistema FPS completo<br>
+      - Cajas en el suelo para colisiones<br>
+      - Paredes invisibles en límites de grilla<br>
+      - W/A/S/D se mueven según hacia donde miras<br>
+      - Limitado a área de grilla (20x20) con paredes invisibles
+    </div>
+  </div>
+
+  <div id="rotation-controls">
+    <h4>Rotación Gaussian</h4>
+    <div class="rotation-slider">
+      <label>Rot X:</label>
+      <input type="range" id="rotX" min="-180" max="180" value="0" step="1">
+      <span class="value" id="rotX-value">0°</span>
+    </div>
+    <div class="rotation-slider">
+      <label>Rot Y:</label>
+      <input type="range" id="rotY" min="-180" max="180" value="0" step="1">
+      <span class="value" id="rotY-value">0°</span>
+    </div>
+    <div class="rotation-slider">
+      <label>Rot Z:</label>
+      <input type="range" id="rotZ" min="-180" max="180" value="0" step="1">
+      <span class="value" id="rotZ-value">0°</span>
+    </div>
+    <div style="border-top: 1px solid #555; margin-top: 10px; padding-top: 10px;">
+      <strong style="color: #FFD700;">Posición:</strong>
+    </div>
+    <div class="rotation-slider">
+      <label>Pos X:</label>
+      <input type="range" id="posX" min="-10" max="10" value="0" step="0.1">
+      <span class="value" id="posX-value">0.0</span>
+    </div>
+    <div class="rotation-slider">
+      <label>Pos Y:</label>
+      <input type="range" id="posY" min="-10" max="10" value="0" step="0.1">
+      <span class="value" id="posY-value">0.0</span>
+    </div>
+    <div class="rotation-slider">
+      <label>Pos Z:</label>
+      <input type="range" id="posZ" min="-10" max="10" value="0" step="0.1">
+      <span class="value" id="posZ-value">0.0</span>
+    </div>
+    <div id="quaternion-display">
+      <div>Quaternion:</div>
+      <div id="quat-values">[0, 0, 0, 1]</div>
+      <div style="margin-top: 5px;">Position:</div>
+      <div id="pos-values">[0.0, 0.0, 0.0]</div>
+    </div>
+    <button id="reset-button">Reset a Valores por Defecto</button>
+  </div>
+
+  <!-- Crosshair para targeting -->
+  <div id="crosshair"></div>
+
+  <!-- Hint de interacción -->
+  <div id="interaction-hint" class="interaction-hint">
+    Click en el cubo rojo para más información
+  </div>
+
+  <!-- Modal de información -->
+  <div id="info-modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="modal-header">
+        <h2>Auria Visual</h2>
+        <div class="subtitle">Arquitectura & Visualización de Vanguardia</div>
+      </div>
+      <div class="modal-body">
+        <p>
+          <span class="highlight">Auria Visual</span> es un estudio de arquitectura y visualización que combina diseño innovador 
+          con tecnología de vanguardia para crear experiencias espaciales excepcionales.
+        </p>
+        
+        <h3>Nuestra Filosofía</h3>
+        <p>
+          Creemos en la arquitectura como narrativa visual. Cada proyecto cuenta una historia única a través de 
+          <span class="highlight">composiciones cuidadosamente diseñadas</span> que integran luz, espacio y materialidad 
+          para generar experiencias memorables.
+        </p>
+        
+        <h3>Servicios Especializados</h3>
+        <p>
+          - <span class="highlight">Visualización Arquitectónica:</span> Renderizados fotorrealistas de alta calidad<br>
+          - <span class="highlight">Experiencias Inmersivas:</span> Tours virtuales y realidad aumentada<br>
+          - <span class="highlight">Diseño Conceptual:</span> Desarrollo de propuestas arquitectónicas innovadoras<br>
+          - <span class="highlight">Tecnología 3D:</span> Implementación de Gaussian Splatting y técnicas avanzadas
+        </p>
+        
+        <h3>Enfoque Innovador</h3>
+        <p>
+          Utilizamos tecnologías emergentes como <span class="highlight">3D Gaussian Splatting</span> para crear 
+          representaciones espaciales que trascienden los límites tradicionales entre lo físico y lo digital, 
+          ofreciendo a nuestros clientes nuevas formas de experimentar y comprender el espacio arquitectónico.
+        </p>
+        
+        <p style="margin-top: 25px; text-align: center; color: #4CAF50; font-style: italic;">
+          "Transformando visiones en realidades espaciales"
+        </p>
+      </div>
+    </div>
+  </div>
+  
+  <script type="module" src="/src/auria/old-test/dropin.js"></script>
+  
+  <script>
+    // Ocultar instrucciones al hacer click
+    document.addEventListener('click', () => {
+      const instructions = document.getElementById('instructions');
+      instructions.classList.add('hidden');
+    });
+    
+    // Mostrar instrucciones al presionar ESC
+    document.addEventListener('keydown', (event) => {
+      if (event.code === 'Escape') {
+        const instructions = document.getElementById('instructions');
+        instructions.classList.remove('hidden');
+      }
+    });
+  </script>
 </body>
 
 </html>

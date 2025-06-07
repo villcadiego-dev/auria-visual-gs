@@ -1,19 +1,46 @@
-import { Viewer, DropInViewer, ArrowHelper } from './auria-base.js';
+import { BaseScene } from './core/BaseScene.js';
 
+/**
+ * Escena Stump con sistema FPS completo
+ * Hereda toda la funcionalidad de BaseScene:
+ * - Navegación FPS con controles WASD
+ * - Física con cannon-js
+ * - Controles de transformación en tiempo real
+ * - Interfaz de usuario completa
+ */
+class StumpScene extends BaseScene {
+    constructor() {
+        console.log('🌳 Inicializando StumpScene...');
+        
+        // Configurar la escena stump sin objetos interactivos
+        super('stump', { 
+            enableInteraction: false // Sin cubos interactivos para esta escena
+        });
+        
+        console.log('✅ StumpScene inicializada correctamente');
+    }
 
-const urlParams = new URLSearchParams(window.location.search);
-const mode = parseInt(urlParams.get('mode')) || 0;
+    /**
+     * Personalizar la configuración de la escena stump si es necesario
+     * Se puede override este método para agregar elementos específicos
+     */
+    customizeScene() {
+        // Agregar cualquier personalización específica de la escena stump aquí
+        console.log('🌳 Escena Stump personalizada con sistema FPS completo');
+    }
+}
 
-const viewer = new Viewer({
-    cameraUp: [0, -1, -1.0],
-    initialCameraPosition: [-3.3816, 1.96931, -1.71890],
-    initialCameraLookAt: [-0.04979, 1.37519, 1.13443],
-    sphericalHarmonicsDegree: 2
-});
-let path = '/assets/data/stump/stump' + (mode ? '_high' : '') + '.ksplat';
-viewer.addSplatScene(path, {
-    'progressiveLoad': false
-})
-    .then(() => {
-        viewer.start();
+// Inicializar escena directamente (sin esperar DOMContentLoaded)
+console.log('🌳 Iniciando StumpScene...');
+try {
+    const stumpScene = new StumpScene();
+    stumpScene.init().catch(error => {
+        console.error('❌ Error al inicializar la escena Stump:', error);
+        console.error('Stack trace:', error.stack);
     });
+    window.stumpScene = stumpScene; // Para acceso global si es necesario
+    console.log('✅ StumpScene creada y inicializando...');
+} catch (error) {
+    console.error('❌ Error al crear la escena Stump:', error);
+    console.error('Stack trace:', error.stack);
+}

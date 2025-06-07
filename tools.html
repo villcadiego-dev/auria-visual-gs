@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Herramientas - Auria Visual GS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #111111;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(17, 17, 17, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(214, 184, 140, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #d6b88c;
+            text-decoration: none;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: #d6b88c;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .page-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+            color: #d6b88c;
+        }
+
+        .page-description {
+            font-size: 20px;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid rgba(214, 184, 140, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(214, 184, 140, 0.3);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .tool-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #d6b88c;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tool-description {
+            font-size: 16px;
+            color: #cccccc;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .form-group input[type="file"] {
+            display: none;
+        }
+
+        .file-input-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #d6b88c 0%, #c4a673 100%);
+            color: #111111;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .file-input-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(214, 184, 140, 0.4);
+        }
+
+        .file-name {
+            margin-left: 15px;
+            color: #cccccc;
+            font-style: italic;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(214, 184, 140, 0.2);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input[type="text"]:focus,
+        .form-group input[type="number"]:focus {
+            outline: none;
+            border-color: #d6b88c;
+            box-shadow: 0 0 0 3px rgba(214, 184, 140, 0.1);
+        }
+
+        .form-group input[type="checkbox"] {
+            margin-right: 8px;
+            accent-color: #d6b88c;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .action-button {
+            background: linear-gradient(135deg, #d6b88c 0%, #c4a673 100%);
+            color: #111111;
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(214, 184, 140, 0.4);
+        }
+
+        .action-button:disabled {
+            background: #555555;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .status-message {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .status-success {
+            background: rgba(76, 175, 80, 0.2);
+            color: #4CAF50;
+            border: 1px solid rgba(76, 175, 80, 0.3);
+        }
+
+        .status-error {
+            background: rgba(244, 67, 54, 0.2);
+            color: #f44336;
+            border: 1px solid rgba(244, 67, 54, 0.3);
+        }
+
+        .status-loading {
+            background: rgba(214, 184, 140, 0.2);
+            color: #d6b88c;
+            border: 1px solid rgba(214, 184, 140, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid #d6b88c;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .valid-value-hint {
+            font-size: 14px;
+            color: #888888;
+            margin-top: 4px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #d6b88c;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 40px;
+            transition: color 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                gap: 20px;
+            }
+
+            .nav-menu a {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 40px 15px;
+            }
+
+            .tool-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+
+    <script type="module">
+        import * as GaussianSplats3D from './src/index.js';
+        import * as THREE from 'three';
+
+        let currentAlphaRemovalThreshold;
+        let currentCameraUpArray;
+        let currentCameraPositionArray;
+        let currentCameraLookAtArray;
+        let currentAntialiased;
+        let current2DScene;
+        let currentSphericalHarmonicsDegree;
+
+        function fileBufferToSplatBuffer(fileBufferData, format, alphaRemovalThreshold, compressionLevel, sectionSize, sceneCenter, blockSize, bucketSize, outSphericalHarmonicsDegree = 0) {
+            if (format === GaussianSplats3D.SceneFormat.Ply) {
+                return GaussianSplats3D.PlyLoader.loadFromFileData(fileBufferData.data, alphaRemovalThreshold, compressionLevel, true, outSphericalHarmonicsDegree, sectionSize, sceneCenter, blockSize, bucketSize);
+            } else {
+                if (format === GaussianSplats3D.SceneFormat.Splat) {
+                    return GaussianSplats3D.SplatLoader.loadFromFileData(fileBufferData.data, alphaRemovalThreshold, compressionLevel, true, sectionSize, sceneCenter, blockSize, bucketSize);
+                } else {
+                    return GaussianSplats3D.KSplatLoader.loadFromFileData(fileBufferData.data);
+                }
+            }
+        }
+
+        window.onFileChange = function (input, fileNameElementId) {
+            const fileNameElement = document.getElementById(fileNameElementId);
+            const fileName = input.files[0] ? input.files[0].name : '(Ningún archivo seleccionado)';
+            fileNameElement.textContent = fileName;
+        }
+
+        let conversionInProgress = false;
+        window.convertPlyFile = function () {
+            if (conversionInProgress) return;
+            
+            const conversionFile = document.getElementById("conversionFile");
+            const compressionLevel = parseInt(document.getElementById("compressionLevel").value);
+            const alphaRemovalThreshold = parseInt(document.getElementById("alphaRemovalThreshold").value);
+            const sphericalHarmonicsDegree = parseInt(document.getElementById("conversionSphericalHarmonicsDegree").value);
+            const sectionSize = 0;
+            let sceneCenterArray = document.getElementById("sceneCenter").value;
+            const blockSize = parseFloat(document.getElementById("blockSize").value);
+            const bucketSize = parseInt(document.getElementById("bucketSize").value);
+
+            sceneCenterArray = sceneCenterArray.split(',');
+
+            if (sceneCenterArray.length !== 3) {
+                setConversionError("El centro de escena debe contener 3 elementos.");
+                return;
+            }
+
+            for (let i = 0; i < 3; i++) {
+                sceneCenterArray[i] = parseFloat(sceneCenterArray[i]);
+                if (isNaN(sceneCenterArray[i])) {
+                    setConversionError("Centro de escena inválido.");
+                    return;
+                }
+            }
+
+            const sceneCenter = new THREE.Vector3().fromArray(sceneCenterArray);
+
+            if (isNaN(compressionLevel) || compressionLevel < 0 || compressionLevel > 2) {
+                setConversionError("Nivel de compresión inválido.");
+                return;
+            } else if (isNaN(alphaRemovalThreshold) || alphaRemovalThreshold < 0 || alphaRemovalThreshold > 255) {
+                setConversionError("Umbral de eliminación alfa inválido.");
+                return;
+            } else if (isNaN(sphericalHarmonicsDegree) || sphericalHarmonicsDegree < 0 || sphericalHarmonicsDegree > 2) {
+                setConversionError("Grado SH inválido.");
+                return;
+            } else if (isNaN(blockSize) || blockSize < 0.1) {
+                setConversionError("Tamaño de bloque inválido.");
+                return;
+            } else if (isNaN(bucketSize) || bucketSize < 2 || bucketSize > 65536) {
+                setConversionError("Tamaño de bucket inválido.");
+                return;
+            } else if (!conversionFile.files[0]) {
+                setConversionError("Por favor selecciona un archivo para convertir.");
+                return;
+            }
+
+            setConversionError("");
+            const convertButton = document.getElementById("convertButton");
+
+            const conversionDone = (error) => {
+                if (error) {
+                    console.error(error);
+                    setConversionError("No se pudo convertir el archivo.");
+                } else {
+                    setConversionStatus("¡Conversión completada!");
+                }
+                convertButton.disabled = false;
+                conversionInProgress = false;
+            }
+
+            try {
+                const fileReader = new FileReader();
+                fileReader.onload = function () {
+                    convertButton.disabled = true;
+                    setConversionStatus("Procesando archivo...");
+                    const conversionFileName = conversionFile.files[0].name.trim();
+                    const format = GaussianSplats3D.LoaderUtils.sceneFormatFromPath(conversionFileName);
+                    const fileData = {data: fileReader.result};
+                    
+                    window.setTimeout(() => {
+                        try {
+                            const splatBufferPromise = fileBufferToSplatBuffer(fileData, format, alphaRemovalThreshold, compressionLevel,
+                                sectionSize, sceneCenter, blockSize, bucketSize, sphericalHarmonicsDegree);
+                            splatBufferPromise.then((splatBuffer) => {
+                                GaussianSplats3D.KSplatLoader.downloadFile(splatBuffer, 'converted_file.ksplat');
+                                conversionDone();
+                            });
+                        } catch (e) {
+                            conversionDone(e);
+                        }
+                    }, 100);
+                }
+                conversionInProgress = true;
+                setConversionStatus("Cargando archivo...");
+                fileReader.readAsArrayBuffer(conversionFile.files[0]);
+            } catch (e) {
+                conversionDone(e);
+            }
+        }
+
+        window.viewSplat = function () {
+            const viewFile = document.getElementById("viewFile");
+            const alphaRemovalThreshold = parseInt(document.getElementById("alphaRemovalThresholdView").value);
+            let cameraUpArray = document.getElementById("cameraUp").value;
+            let cameraPositionArray = document.getElementById("cameraPosition").value;
+            let cameraLookAtArray = document.getElementById("cameraLookAt").value;
+            let antialiased = document.getElementById("antialiased").checked;
+            let sceneIs2D = document.getElementById("2dScene").checked;
+            let sphericalHarmonicsDegree = parseInt(document.getElementById("viewSphericalHarmonicsDegree").value);
+
+            cameraUpArray = cameraUpArray.split(',');
+            cameraPositionArray = cameraPositionArray.split(',');
+            cameraLookAtArray = cameraLookAtArray.split(',');
+
+            if (!viewFile.files[0]) {
+                setViewError("Por favor selecciona un archivo para visualizar.");
+                return;
+            } else if (isNaN(alphaRemovalThreshold) || alphaRemovalThreshold < 0 || alphaRemovalThreshold > 255) {
+                setViewError("Umbral de eliminación alfa inválido.");
+                return;
+            } else if (isNaN(sphericalHarmonicsDegree) || sphericalHarmonicsDegree < 0 || sphericalHarmonicsDegree > 2) {
+                setViewError("Grado SH inválido.");
+                return;
+            }
+
+            if (cameraUpArray.length !== 3) {
+                setViewError("Camera up debe contener 3 elementos.");
+                return;
+            }
+
+            if (cameraPositionArray.length !== 3) {
+                setViewError("Posición de cámara debe contener 3 elementos.");
+                return;
+            }
+
+            if (cameraLookAtArray.length !== 3) {
+                setViewError("Camera look-at debe contener 3 elementos.");
+                return;
+            }
+
+            for (let i = 0; i < 3; i++) {
+                cameraUpArray[i] = parseFloat(cameraUpArray[i]);
+                cameraPositionArray[i] = parseFloat(cameraPositionArray[i]);
+                cameraLookAtArray[i] = parseFloat(cameraLookAtArray[i]);
+
+                if (isNaN(cameraUpArray[i])) {
+                    setViewError("Camera up inválido.");
+                    return;
+                }
+
+                if (isNaN(cameraPositionArray[i])) {
+                    setViewError("Posición de cámara inválida.");
+                    return;
+                }
+
+                if (isNaN(cameraLookAtArray[i])) {
+                    setViewError("Camera look-at inválido.");
+                    return;
+                }
+            }
+
+            const viewFileName = viewFile.files[0].name.trim();
+            const format = GaussianSplats3D.LoaderUtils.sceneFormatFromPath(viewFileName);
+
+            currentAlphaRemovalThreshold = alphaRemovalThreshold;
+            currentCameraUpArray = cameraUpArray;
+            currentCameraPositionArray = cameraPositionArray;
+            currentCameraLookAtArray = cameraLookAtArray;
+            currentAntialiased = antialiased;
+            current2DScene = sceneIs2D;
+            currentSphericalHarmonicsDegree = sphericalHarmonicsDegree;
+
+            try {
+                const fileReader = new FileReader();
+                fileReader.onload = function () {
+                    try {
+                        runViewer(fileReader.result, format, alphaRemovalThreshold, cameraUpArray, cameraPositionArray, cameraLookAtArray, antialiased, sceneIs2D, sphericalHarmonicsDegree);
+                    } catch (e) {
+                        console.error(e);
+                        setViewError("No se pudo visualizar la escena.");
+                    }
+                }
+                setViewStatus("Cargando escena...");
+                fileReader.readAsArrayBuffer(viewFile.files[0]);
+            } catch (e) {
+                console.error(e);
+                setViewError("No se pudo visualizar la escena.");
+            }
+        }
+
+        function runViewer(splatBufferData, format, alphaRemovalThreshold, cameraUpArray, cameraPositionArray, cameraLookAtArray, antialiased, sceneIs2D, sphericalHarmonicsDegree) {
+            const viewerOptions = {
+                'cameraUp': cameraUpArray,
+                'initialCameraPosition': cameraPositionArray,
+                'initialCameraLookAt': cameraLookAtArray,
+                'halfPrecisionCovariancesOnGPU': false,
+                'antialiased': antialiased || false,
+                'splatRenderMode': sceneIs2D ? GaussianSplats3D.SplatRenderMode.TwoD : GaussianSplats3D.SplatRenderMode.ThreeD,
+                'sphericalHarmonicsDegree': sphericalHarmonicsDegree
+            };
+            const splatBufferOptions = {
+                'splatAlphaRemovalThreshold': alphaRemovalThreshold
+            };
+            const splatBufferPromise = fileBufferToSplatBuffer({data: splatBufferData}, format, alphaRemovalThreshold, 0,
+                undefined, undefined, undefined, undefined, sphericalHarmonicsDegree);
+            splatBufferPromise.then((splatBuffer) => {
+                // Ocultar el contenido de herramientas y cambiar fondo
+                document.querySelector('.main-container').style.display = 'none';
+                document.querySelector('.header').style.display = 'none';
+                document.body.style.backgroundColor = "#000000";
+                
+                // Crear historial para volver
+                history.pushState("ViewSplat", null);
+                
+                // Inicializar viewer en la misma página
+                const viewer = new GaussianSplats3D.Viewer(viewerOptions);
+                viewer.addSplatBuffers([splatBuffer], [splatBufferOptions])
+                    .then(() => {
+                        viewer.start();
+                        setViewStatus("");
+                    });
+            });
+        }
+
+        // Manejar el botón atrás del navegador
+        window.addEventListener("popstate", (event) => {
+            if (event.state === "ViewSplat") {
+                // Restaurar la página de herramientas
+                window.location.reload();
+            }
+        });
+
+        function setConversionError(msg) {
+            const statusEl = document.getElementById("conversionStatus");
+            statusEl.textContent = msg;
+            statusEl.className = msg ? "status-message status-error" : "";
+        }
+
+        function setConversionStatus(msg) {
+            const statusEl = document.getElementById("conversionStatus");
+            statusEl.textContent = msg;
+            statusEl.className = msg ? "status-message status-loading" : "";
+            if (msg) {
+                statusEl.innerHTML = '<div class="loading-spinner"></div>' + msg;
+            }
+        }
+
+        function setViewError(msg) {
+            const statusEl = document.getElementById("viewStatus");
+            statusEl.textContent = msg;
+            statusEl.className = msg ? "status-message status-error" : "";
+        }
+
+        function setViewStatus(msg) {
+            const statusEl = document.getElementById("viewStatus");
+            statusEl.textContent = msg;
+            statusEl.className = msg ? "status-message status-loading" : "";
+            if (msg) {
+                statusEl.innerHTML = '<div class="loading-spinner"></div>' + msg;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="/" class="logo">Auria Visual GS</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="index.html#scenes">Escenas</a></li>
+                <li><a href="https://www.auriavisual.com/" target="_blank">Auria Visual</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <a href="index.html" class="back-link">
+            ← Volver al inicio
+        </a>
+
+        <div class="page-header">
+            <h1 class="page-title">Herramientas</h1>
+            <p class="page-description">
+                Convierte y visualiza archivos 3D con herramientas avanzadas de procesamiento
+            </p>
+        </div>
+
+        <div class="tools-grid">
+            <!-- Viewer Tool -->
+            <div class="tool-card">
+                <h2 class="tool-title">
+                    Visualizador de Archivos
+                </h2>
+                <p class="tool-description">
+                    Carga y visualiza archivos .ply, .ksplat o .splat con configuraciones personalizadas de cámara y renderizado.
+                </p>
+
+                <div class="form-group">
+                    <label for="viewFile">Seleccionar archivo:</label>
+                    <label for="viewFile" class="file-input-button">Elegir archivo</label>
+                    <input type="file" id="viewFile" onchange="onFileChange(this, 'viewFileName')">
+                    <span id="viewFileName" class="file-name">(Ningún archivo seleccionado)</span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="alphaRemovalThresholdView">Alpha mínimo:</label>
+                        <input id="alphaRemovalThresholdView" type="number" value="1" min="1" max="255">
+                        <div class="valid-value-hint">(1 - 255)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="viewSphericalHarmonicsDegree">Nivel SH:</label>
+                        <input id="viewSphericalHarmonicsDegree" type="number" value="0" min="0" max="2">
+                        <div class="valid-value-hint">(0, 1, o 2)</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="antialiased">
+                        Anti-aliasing
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="2dScene">
+                        Escena 2D
+                    </label>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cameraUp">Camera up:</label>
+                        <input id="cameraUp" type="text" value="0, 1, 0" placeholder="x, y, z">
+                    </div>
+                    <div class="form-group">
+                        <label for="cameraPosition">Posición cámara:</label>
+                        <input id="cameraPosition" type="text" value="0, 1, 0" placeholder="x, y, z">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="cameraLookAt">Camera look-at:</label>
+                    <input id="cameraLookAt" type="text" value="1, 0, 0" placeholder="x, y, z">
+                </div>
+
+                <button class="action-button" onclick="viewSplat()">Visualizar</button>
+                
+                <div id="viewStatus"></div>
+            </div>
+
+            <!-- Converter Tool -->
+            <div class="tool-card">
+                <h2 class="tool-title">
+                    Conversor a .ksplat
+                </h2>
+                <p class="tool-description">
+                    Convierte archivos .ply o .splat al formato optimizado .ksplat para mejor rendimiento y carga más rápida.
+                </p>
+
+                <div class="form-group">
+                    <label for="conversionFile">Seleccionar archivo:</label>
+                    <label for="conversionFile" class="file-input-button">Elegir archivo</label>
+                    <input type="file" id="conversionFile" onchange="onFileChange(this, 'conversionFileName')">
+                    <span id="conversionFileName" class="file-name">(Ningún archivo seleccionado)</span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="alphaRemovalThreshold">Alpha mínimo:</label>
+                        <input id="alphaRemovalThreshold" type="number" value="1" min="1" max="255">
+                        <div class="valid-value-hint">(1 - 255)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="compressionLevel">Nivel compresión:</label>
+                        <input id="compressionLevel" type="number" value="1" min="0" max="2">
+                        <div class="valid-value-hint">(0, 1, o 2)</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="conversionSphericalHarmonicsDegree">Nivel SH:</label>
+                        <input id="conversionSphericalHarmonicsDegree" type="number" value="0" min="0" max="2">
+                        <div class="valid-value-hint">(0, 1, o 2)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="sceneCenter">Centro escena:</label>
+                        <input id="sceneCenter" type="text" value="0, 0, 0" placeholder="x, y, z">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="blockSize">Tamaño bloque:</label>
+                        <input id="blockSize" type="number" value="5.0" min="0.1" step="0.1">
+                        <div class="valid-value-hint">(≥ 0.1)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bucketSize">Tamaño bucket:</label>
+                        <input id="bucketSize" type="number" value="256" min="2" max="65536">
+                        <div class="valid-value-hint">(2 - 65536)</div>
+                    </div>
+                </div>
+
+                <button id="convertButton" class="action-button" onclick="convertPlyFile()">Convertir</button>
+                
+                <div id="conversionStatus"></div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
