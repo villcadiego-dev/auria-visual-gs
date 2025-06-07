@@ -2,8 +2,8 @@
   # Directorio de publicación (raíz del proyecto donde está index.html)
   publish = "."
   
-  # Comando de build (opcional, ya que es un sitio estático)
-  command = "echo 'No build needed - static site'"
+  # Comando de build (sitio estático)
+  command = "echo 'Static site deployment'"
 
 [[headers]]
   # Aplicar headers a todos los archivos
