@@ -1,5 +1,8 @@
 build
+# Ignorar datos excepto truck (necesario para producción)
 public/assets/data/*
+!public/assets/data/truck/
+!public/assets/data/truck/*
 
 # Node modules
 node_modules/
